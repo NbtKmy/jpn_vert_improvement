@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					## Verbesserung des OCR-Verfahrens für Inhaltsverzeichnisse japanischsprachiger Materialien II
+				</section>
+				<section>
+					<section  data-markdown>
+						* Das Ziel des ganzen Projekts
+						* Was ist bisher erreicht?
+						* Das Modell "jpn_vert (best)" Verbessern
+					</section>
+				</section>
+				<section>
+					<section  data-markdown>
+						# Das Ziel des Projekts
+					</section>
+					<section  data-markdown>
+						# 
+					</section>
+				</section>
+				<section>
+					<section  data-markdown>
+						# Was ist bisher erreicht?
+					</section>
+					<section  data-markdown>
+						# 
+					</section>
+				</section>
+				<section>
+					<section  data-markdown>
+						# Das Modell "jpn_vert (best)" Verbessern
+					</section>
+					<section  data-markdown>
+						## Methode Fine tuning
+					</section>
+					<section  data-markdown>
+						### Fine tuning?
+						* Es wird ein OCR-Modell nicht von Anfang an erstellt
+						* Sondern ein bereits existierendes Modell "jpn_vert (best)" wird durch weiteres Training verbessert
+						* Das Modell ist https://github.com/tesseract-ocr/tessdata_best zu finden
+					</section>
+					<section  data-markdown>
+						### Trainingsdaten für Fine tuning
+						* Ground truth Daten aus Image und Texte
+						* Ein Textkorpus zuerst erstellen
+						* Der Textkorpus zeilenweise in die Bilder umwandeln
+					</section>
+					<section  data-markdown>
+						### Textkorpus
+						* Text aus Wikipedia
+						* Werktitel aus Authoritätsdaten von National Diet Library (NDL)
+					</section>
+					<section  data-markdown>
+						### Text aus Wikipedia
+						* Die gesamten japanischsprachigen Wikipedia-Artikel als Dump
+						* Hier: https://dumps.wikimedia.org/jawiki/latest/ (jawiki-latest-pages-articles.xml.bz2 am 01.05.2021)
+						* Mit [Wikiextraktor](https://github.com/attardi/wikiextractor) von XML zu Text umwandeln
+					</section>
+					<section  data-markdown>
+						### Wikipedia-Texte aus Dump extrahieren I 
+						1. `pip install wikiextractor`  
+						1. `python -m wikiextractor.WikiExtractor jawiki-latest-pages-articles.xml`
+					</section>
+					<section  data-markdown>
+						### Wikipedia-Texte aus Dump extrahieren II
+						1. `find text/ | grep wiki | awk '{system("cat "$0" >> wiki.txt")}'`  
+						1. `sed -i '/^<[^>]*>$/d' wiki.txt`  
+						1. `sed -i '/^$/d' wiki.txt`  
+						1. `sed -e '/\.$/d' ./wiki.txt > ./wiki_v2.txt`  
+						1. `sed -e 's/。/。\n/g' ./wiki_v2.txt | sed -e '/^$/d' > ./wiki_v3.txt`  
+					</section>
+					<section  data-markdown>
+						### Werktitel aus Authoritätsdaten von NDL
+						1. [NDL Web Authorities](https://id.ndl.go.jp/auth/ndla) erlaubt [SPARQL-Query](https://id.ndl.go.jp/auth/ndla?query=PREFIX+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rda%3A+%3Chttp%3A%2F%2FRDVocab.info%2FElementsGr2%2F%3E%0D%0APREFIX+foaf%3A+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+xl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2008%2F05%2Fskos-xl%23%3E%0D%0APREFIX+ndl%3A+%3Chttp%3A%2F%2Fndl.go.jp%2Fdcndl%2Fterms%2F%3E%0D%0ASELECT+*+WHERE+%7B%0D%0A%3Furi1+skos%3AinScheme+%3Chttp%3A%2F%2Fid.ndl.go.jp%2Fauth%23uniformTitles%3E+%3B+skos%3AexactMatch+%3Flink+%3B+skos%3ArelatedMatch+%3Flink2.%0D%0A%3Furi1+xl%3AprefLabel+%5B+xl%3AliteralForm+%3Ftitle%5D.+%0D%0A%3Furi1+xl%3AaltLabel+%5B+xl%3AliteralForm+%3Falttitle%5D.+%0D%0AFILTER+regex%28%3Flink2%2C+%27%5E.*KG.*%27%29%0D%0A%7D%0D%0A%0D%0A&output=json) 
+						1. Python library "[SparqlWrapper](https://github.com/RDFLib/sparqlwrapper)" installieren
+						1. Eine [Python-Code](https://github.com/NbtKmy/jpn_vert_improvement/blob/main/training_data/ndl_sparql.py) schreiben und laufen lassen
+					</section>
+					<section  data-markdown>
+						### Fine tuning 1
+						1. [NDL Web Authorities](https://id.ndl.go.jp/auth/ndla) erlaubt [SPARQL-Query](https://id.ndl.go.jp/auth/ndla?query=PREFIX+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rda%3A+%3Chttp%3A%2F%2FRDVocab.info%2FElementsGr2%2F%3E%0D%0APREFIX+foaf%3A+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+xl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2008%2F05%2Fskos-xl%23%3E%0D%0APREFIX+ndl%3A+%3Chttp%3A%2F%2Fndl.go.jp%2Fdcndl%2Fterms%2F%3E%0D%0ASELECT+*+WHERE+%7B%0D%0A%3Furi1+skos%3AinScheme+%3Chttp%3A%2F%2Fid.ndl.go.jp%2Fauth%23uniformTitles%3E+%3B+skos%3AexactMatch+%3Flink+%3B+skos%3ArelatedMatch+%3Flink2.%0D%0A%3Furi1+xl%3AprefLabel+%5B+xl%3AliteralForm+%3Ftitle%5D.+%0D%0A%3Furi1+xl%3AaltLabel+%5B+xl%3AliteralForm+%3Falttitle%5D.+%0D%0AFILTER+regex%28%3Flink2%2C+%27%5E.*KG.*%27%29%0D%0A%7D%0D%0A%0D%0A&output=json) 
+						1. Python library "[SparqlWrapper](https://github.com/RDFLib/sparqlwrapper)" installieren
+						1. Eine [Python-Code](https://github.com/NbtKmy/jpn_vert_improvement/blob/main/training_data/ndl_sparql.py) schreiben und laufen lassen
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>

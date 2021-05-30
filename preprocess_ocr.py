@@ -105,7 +105,7 @@ if __name__ == "__main__":
     upDiff=(20, 20, 20),
     flags=4 | 255 << 8,
     )
-    cv2.imwrite('resultWstencil.jpg', newImg)
+    cv2.imwrite('result.tif', newImg)
 
     # Textbox ausschneiden mit np (box = image[y:y+h, x:x+w])
     # line_num = 0

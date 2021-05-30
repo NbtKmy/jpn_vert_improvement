@@ -1,4 +1,8 @@
-# Trainingsdaten aus den Wikipedia-Texten (Japanisch) herstellen
+# Verbessrungsversuch des jpn_vert-Modells für tesseract
+
+
+
+## Trainingsdaten aus den Wikipedia-Texten (Japanisch) herstellen
 
 Hier wird der Prozess, wie die Trainingsdaten erstellt wurde, dokumentiert.
 Grob gesagt, sind die Trainingsdaten aus Wikipedia-Texte und Werktitel der [Authoritätsdaten der japanischen National Diet Library](https://id.ndl.go.jp/auth/ndla) entstanden.  
@@ -51,22 +55,37 @@ Im File "wiki_v3.txt" sind alle Sätze und (sinnvollere) Überschriften jeweils 
 
 NDL-Authorities erlaubt den Zugriff auf die Daten durch SPARQL-Query.  
 Die ausführliche Information über SPARQL-Query ist auf der Webseite von [Web NDL Authorities](https://id.ndl.go.jp/information/sparql/) zu sehen.
-Um alle mögliche Werktitle herauszufiltern, ist die Python-Code "ndl_sparql.py" geschrieben.  
+Um alle mögliche Werktitle herauszufiltern, ist die Python-Code [./training_data/ndl_sparql.py](https://github.com/NbtKmy/jpn_vert_improvement/blob/main/training_data/ndl_sparql.py) geschrieben.  
 Dabei ist die Python library [SparqlWrapper](https://github.com/RDFLib/sparqlwrapper) verwendet.
 
-Die so gesammelten Werktitel sind in "titelList.txt" zu finden.
+Die so gesammelten Werktitel sind in [./training_data/titelList.txt](https://github.com/NbtKmy/jpn_vert_improvement/blob/main/training_data/titleList.txt) zu finden.
 
 
 ## Erstellung der Trainingsdaten
-In diesem Projekt sind zwei Sets der Trainingsdaten erstellt. Ein Set besteht aus reinem Text, für den die Wikipedia-Texte und Werktitel gemischt worden sind. Bei dem anderen Set ist die Struktur des japanischsprachigen Inhaltsverzeichnis berücksichtigt und die fiktiven Seitenzahl und das Füllzeichen '︙' hinzugefügt. 
+In diesem Projekt sind drei Sets der Trainingsdaten erstellt. 
+Das erste Set besteht aus reinem Text, für den die Wikipedia-Texte und Werktitel gemischt worden sind. 
 
-![Beispielbild](./Bspl_img.tif)
+Bei dem zweiten Set ist die Struktur des japanischsprachigen Inhaltsverzeichnis berücksichtigt und die fiktiven Seitenzahl und das Füllzeichen '︙' hinzugefügt. 
+
+<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/89.png" width="50px">
+
 
 ```
-参加し、同会の代表世話人を務めている。鼠の草子天然ガスなどの︙︙︙︙︙︙︙一一九
+渡暦月9%を刑罰法令の適用の上限金利（民事上の上限であるかに︙︙︙︙︙︙︙︙︙七
 ```
 
-Ein Set enthält 1000 Paare von Bilddatei (.tif) und Textdatei (.gt.txt). 
+
+Bei dem dritten Set sind lediglich die Darstellung der Zahlen in Chinesischer Schrift vertikal verkleinert, so wie sie in einem realen Inhaltsverzeichnis gefunden wird.
+
+<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/57.png" width="50px">
+
+
+Jedes Set enthält 1000 Paare von Bilddatei (.tif) und Textdatei (.gt.txt).  
+
+
+## Erstellung der Word- und Puncliste
+
+
 
 ## Training mit Tesstrain
 Für das Training wurde [tesstrain](https://github.com/tesseract-ocr/tesstrain) verwendet. 
@@ -96,4 +115,8 @@ PSM=5 ist für jpn_vert notwendig...
 Um die log-Daten zu checken
 
 `$ tail -f train.log`
+
+## Trainingsverfahren
+
+
 
