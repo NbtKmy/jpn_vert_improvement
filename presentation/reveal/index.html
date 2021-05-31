@@ -31,7 +31,10 @@
 						# Das Ziel des Projekts
 					</section>
 					<section  data-markdown>
-						# 
+						## Inhaltsverzeichnisse im vertikeln japanischen Schrift automatisch erschliessen
+					</section>
+					<section  data-markdown>
+						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/bsp1_2.png" width="500px">
 					</section>
 				</section>
 				<section>
@@ -39,7 +42,14 @@
 						# Was ist bisher erreicht?
 					</section>
 					<section  data-markdown>
-						# 
+						### Vorarbeitungsprozess automatisiert mit Python  
+						* Zuerst Textbereich markieren...
+						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res.jpg" width="500px">
+					</section>
+					<section  data-markdown>
+						### Vorarbeitungsprozess automatisiert mit Python  
+						* Danach den Aussenbereich mit der weissen Farben füllen
+						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/result.png" width="500px">
 					</section>
 				</section>
 				<section>
@@ -86,14 +96,37 @@
 						1. `sed -e 's/。/。\n/g' ./wiki_v2.txt | sed -e '/^$/d' > ./wiki_v3.txt`  
 					</section>
 					<section  data-markdown>
-						### Werktitel aus Authoritätsdaten von NDL
+						### Werktitel aus Authoritätsdaten von der NDL
 						1. [NDL Web Authorities](https://id.ndl.go.jp/auth/ndla) erlaubt [SPARQL-Query](https://id.ndl.go.jp/auth/ndla?query=PREFIX+skos%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rda%3A+%3Chttp%3A%2F%2FRDVocab.info%2FElementsGr2%2F%3E%0D%0APREFIX+foaf%3A+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0APREFIX+xl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2008%2F05%2Fskos-xl%23%3E%0D%0APREFIX+ndl%3A+%3Chttp%3A%2F%2Fndl.go.jp%2Fdcndl%2Fterms%2F%3E%0D%0ASELECT+*+WHERE+%7B%0D%0A%3Furi1+skos%3AinScheme+%3Chttp%3A%2F%2Fid.ndl.go.jp%2Fauth%23uniformTitles%3E+%3B+skos%3AexactMatch+%3Flink+%3B+skos%3ArelatedMatch+%3Flink2.%0D%0A%3Furi1+xl%3AprefLabel+%5B+xl%3AliteralForm+%3Ftitle%5D.+%0D%0A%3Furi1+xl%3AaltLabel+%5B+xl%3AliteralForm+%3Falttitle%5D.+%0D%0AFILTER+regex%28%3Flink2%2C+%27%5E.*KG.*%27%29%0D%0A%7D%0D%0A%0D%0A&output=json) 
 						1. Python library "[SparqlWrapper](https://github.com/RDFLib/sparqlwrapper)" installieren
 						1. Eine [Python-Code](https://github.com/NbtKmy/jpn_vert_improvement/blob/main/training_data/ndl_sparql.py) schreiben und laufen lassen
 					</section>
+				</section>
+				<section>
 					<section  data-markdown>
-						### Fine tuning 1
-						* 
+						## Fine tuning
+						* 3 Verfahren, mit 3 unterschiedlichen Datensets
+						* 1 Datensets hat 1000 Paare von Textzeile und Image
+						* Fine tuning immer vom jpn_vert (best) Modell ausgehend
+					</section>
+					<section  data-markdown>
+						## 3 Datensets
+						1. Datenset - eine Zeile besteht aus reinem Text
+						1. Datenset - eine Zeile besteht aus Text, dem Leader-Zeichen ("︙") und die Zahlen in chines. Schrift
+						1. Datenset - eine Zeile besteht aus Text, dem Leader-Zeichen und die Zahlen in chines. Schrift. Die Zahlen im Image ist verkleinert dargestellt 
+					</section>
+					<section  data-markdown>
+						1. Datenset
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/89.png" width="50px">
+					</section>
+					<section  data-markdown>
+						2. Datenset
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/13.png" width="50px">
+					</section>
+					<section  data-markdown>
+						3. Datenset
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/57.png" width="50px">
+					</section>
 				</section>
 			</div>
 		</div>

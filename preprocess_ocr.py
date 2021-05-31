@@ -105,6 +105,9 @@ if __name__ == "__main__":
     upDiff=(20, 20, 20),
     flags=4 | 255 << 8,
     )
+    height = newImg.shape[0]
+    width = newImg.shape[1]
+    newImg = cv2.resize( newImg, (int(width * 2), int(height * 2)))
     cv2.imwrite('result.tif', newImg)
 
     # Textbox ausschneiden mit np (box = image[y:y+h, x:x+w])
