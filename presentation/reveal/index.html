@@ -31,10 +31,16 @@
 						# Das Ziel des Projekts
 					</section>
 					<section  data-markdown>
-						## Inhaltsverzeichnisse im vertikeln japanischen Schrift automatisch erschliessen
+						## Inhaltsverzeichnisse im vertikalen japanischen Schrift automatisch erschliessen
 					</section>
 					<section  data-markdown>
 						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/bsp1_2.png" width="500px">
+					</section>
+					<section  data-markdown>
+						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/bsp_furigana.png" width="200px">
+					</section>
+					<section  data-markdown>
+						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res_00.jpg" width="500px">
 					</section>
 				</section>
 				<section>
@@ -126,6 +132,53 @@
 					<section  data-markdown>
 						3. Datenset
 						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/57.png" width="50px">
+					</section>
+					<section  data-markdown>
+						## Fine tuning mit [tesstrain](https://github.com/tesseract-ocr/tesstrain)  
+						`$ nohup time -f "Run time = %E\n" make training MODEL_NAME=jpn_vert START_MODEL=jpn_vert PSM=5 >> train.log 2>&1 &`  
+						PSM (page segmentation modes)=5 bedeutet "assume a single uniform block of vertically aligned text".
+					</section>
+				</section>
+				<section>
+					<section  data-markdown>
+						## Ergebnisse und Ausblick
+					</section>
+					<section>
+						OCR mit dem normalen jpn_vert (best) Modell
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res0.png" width="500px">
+					</section>
+					<section>
+						Ergebnis mit dem 1. Dataset
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res1.png" width="500px">
+					</section>
+					<section>
+						Ergebnis mit dem 2. Dataset
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res2.png" width="500px">
+					</section>
+					<section>
+						Ergebnis mit dem 3. Dataset
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res3.png" width="500px">
+					</section>
+					<section>
+						Erkannte Textbereiche waren immer gleich  
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res_1.jpg" width="500px">
+					</section>
+					<section  data-markdown>
+						## ... NICHT WIRKLICH BESSER GEWORDEN 😑...
+					</section>
+					<section  data-markdown>
+						## AUSBLICK ODER MÖGLICHE MASSNAHMEN  
+						* Fine tuning mit den unterschiedlich grossen Leader-Zeichen ("︙")
+						* Die Leader-Zeichen und die kleineren Schriften in der Vorarbeitung ausfiltern
+						* Oder vielleicht eine Layout-Erkennung mit Tensorflow o.ä.
+						* Andere OCR-Software wie [kraken](https://github.com/mittagessen/kraken) in Betracht ziehen
+					</section>
+					<section  data-markdown>
+						## Code & Data im Github-Repo  
+						https://nbtkmy.github.io/jpn_vert_improvement/
+					</section>
+					<section  data-markdown>
+						# Vielen Dank!
 					</section>
 				</section>
 			</div>
