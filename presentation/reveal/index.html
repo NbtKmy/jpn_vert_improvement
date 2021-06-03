@@ -34,13 +34,13 @@
 						## Inhaltsverzeichnisse im vertikalen japanischen Schrift automatisch erschliessen
 					</section>
 					<section>
-						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/bsp1_2.png" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/bsp1_2.png" width="900px">
 					</section>
 					<section>
-						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/bsp_furigana.png" width="200px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/bsp_furigana.png" width="180px">
 					</section>
 					<section>
-						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res_00.jpg" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res_00.jpg" width="900px">
 					</section>
 				</section>
 				<section>
@@ -48,13 +48,13 @@
 						# Was ist bisher erreicht?
 					</section>
 					<section>
-						<h2>Vorarbeitungsprozess automatisiert mit Python</h2>
+						<h4>Vorarbeitungsprozess automatisiert mit Python</h4>
 						<p>Zuerst Textbereich markieren...</p>
-						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res.jpg" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res.jpg" width="700px">
 					</section>
 					<section>
 						<p>Danach den Aussenbereich mit der weissen Farben füllen</p>
-						<img scr="https://nbtkmy.github.io/jpn_vert_improvement/presentation/result.png" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/result.png" width="700px">
 					</section>
 				</section>
 				<section>
@@ -120,21 +120,22 @@
 						1. Datenset - eine Zeile besteht aus Text, dem Leader-Zeichen ("︙") und die Zahlen in chines. Schrift
 						1. Datenset - eine Zeile besteht aus Text, dem Leader-Zeichen und die Zahlen in chines. Schrift. Die Zahlen im Image ist verkleinert dargestellt 
 					</section>
-					<section  data-markdown>
-						1. Datenset
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/89.png" width="50px">
+					<section>
+						<h3>1. Datenset</h3>
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/89.png" width="25px">
+					</section>
+					<section>
+						<h3>2. Datenset</h3>
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/13.png" width="25px">
+					</section>
+					<section>
+						<h3>3. Datenset</h3>
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/57.png" width="25px">
 					</section>
 					<section  data-markdown>
-						2. Datenset
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/13.png" width="50px">
-					</section>
-					<section  data-markdown>
-						3. Datenset
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/57.png" width="50px">
-					</section>
-					<section  data-markdown>
-						## Fine tuning mit [tesstrain](https://github.com/tesseract-ocr/tesstrain)  
+						### Fine tuning mit [tesstrain](https://github.com/tesseract-ocr/tesstrain)  
 						`$ nohup time -f "Run time = %E\n" make training MODEL_NAME=jpn_vert START_MODEL=jpn_vert PSM=5 >> train.log 2>&1 &`  
+						
 						PSM (page segmentation modes)=5 bedeutet "assume a single uniform block of vertically aligned text".
 					</section>
 				</section>
@@ -144,23 +145,23 @@
 					</section>
 					<section>
 						OCR mit dem normalen jpn_vert (best) Modell
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res0.png" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res0.png" width="800px">
 					</section>
 					<section>
 						Ergebnis mit dem 1. Dataset
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res1.png" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res1.png" width="800px">
 					</section>
 					<section>
 						Ergebnis mit dem 2. Dataset
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res2.png" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res2.png" width="800px">
 					</section>
 					<section>
 						Ergebnis mit dem 3. Dataset
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res3.png" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/ocr_res3.png" width="800px">
 					</section>
 					<section>
 						Erkannte Textbereiche waren immer gleich  
-						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res_1.jpg" width="500px">
+						<img src="https://nbtkmy.github.io/jpn_vert_improvement/presentation/res_1.jpg" width="800px">
 					</section>
 					<section  data-markdown>
 						## ... NICHT WIRKLICH BESSER GEWORDEN 😑...
