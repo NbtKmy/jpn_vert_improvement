@@ -3,7 +3,7 @@
 In diesem Repo befinden sich die Codes und Daten für das Training von jpn_vert (best).
 Für die Vorarbeitung nehme ich die Python-Code, die ich in dem [anderen Repo](https://github.com/NbtKmy/tesseract_jpn-vert) verwendet habe.  
 
-Presentation: https://nbtkmy.github.io/jpn_vert_improvement/presentation/reveal/index.html
+Presentation: <https://nbtkmy.github.io/jpn_vert_improvement/presentation/reveal/index.html>
 
 # Dokumentation zur Erstellung der Trainingdaten
 
