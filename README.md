@@ -1,14 +1,16 @@
 # Verbessrungsversuch des jpn_vert-Modells für tesseract
 
+In diesem Repo befinden sich die Codes und Daten für das Training von jpn_vert (best).
+Für die Vorarbeitung nehme ich die Python-Code, die ich in dem [anderen Repo](https://github.com/NbtKmy/tesseract_jpn-vert) verwendet habe.  
 
+Presentation: https://nbtkmy.github.io/jpn_vert_improvement/presentation/reveal/index.html
+
+# Dokumentation zur Erstellung der Trainingdaten
+
+Grob gesagt, sind die Trainingsdaten aus Wikipedia-Texte und Werktitel der [Authoritätsdaten der japanischen National Diet Library](https://id.ndl.go.jp/auth/ndla) entstanden.  
+Die Textdaten werden zunächst aus diesen beiden Quellendaten erzeugt. Die Texte werden in einzelnen Zeilen aufgeteilt. Aus diesen Zeilen werden die Bilder erstellt.  
 
 ## Trainingsdaten aus den Wikipedia-Texten (Japanisch) herstellen
-
-Hier wird der Prozess, wie die Trainingsdaten erstellt wurde, dokumentiert.
-Grob gesagt, sind die Trainingsdaten aus Wikipedia-Texte und Werktitel der [Authoritätsdaten der japanischen National Diet Library](https://id.ndl.go.jp/auth/ndla) entstanden.  
-
-
-## Bearbeitung der Wikipedia-Texte
 
 1. Der gesamte Wikipedia-Text (Japanisch) als ein Dump-File herunterladen  
 
@@ -85,7 +87,17 @@ Jedes Set enthält 1000 Paare von Bilddatei (.tif) und Textdatei (.gt.txt).
 
 ## Erstellung der Word- und Puncliste
 
+Unter [langdata_lstm](https://github.com/tesseract-ocr/langdata_lstm) findet man die word-, punc- und numbers-Liste.
+Für das Training können diese Liste verwendet werden.
+Bei jpn_vert ist die numbers-Liste jedoch leer.
 
+In der punc-Liste sind ausschliesslich die "Halfwidth"-Zeichen. Es sind keine speziellen Satzzeichen.
+In der word-Liste sind viele Wörter zu finden. 
+
+In diesem Repo sind eine neue punc-Liste erstellt, die japanisch-speziellen Satzzeichen (Fullwidth) aufgenommen sind (mit der [Python-Code](https://github.com/NbtKmy/jpn_vert_improvement/blob/main/training_data/lstm_dict/create_Punclist.py)).
+Word-Liste habe ich mit der Liste der Werktitel aus der NDL-Auth erweitert (mit der [Python-Code](https://github.com/NbtKmy/jpn_vert_improvement/blob/main/training_data/lstm_dict/create_Wordlist.py)). 
+
+Die neu erstellten Liste sind [hier](https://github.com/NbtKmy/jpn_vert_improvement/tree/main/training_data/lstm_dict) zu finden.
 
 ## Training mit Tesstrain
 Für das Training wurde [tesstrain](https://github.com/tesseract-ocr/tesstrain) verwendet. 
