@@ -128,7 +128,54 @@ Um die log-Daten zu checken
 
 `$ tail -f train.log`
 
-## Trainingsverfahren
+## Trainingsverfahren & die trainierten Modelle
+
+Fine tuning-Training mit den 3 Sets sind jeweils vom jpn_vert (best) Modell ausgehend ausgeführt. 
+Max. Itaration 10000 
+Die trainierten Modell sind folgendermassen genannt: 
+
+* jpn_vert_v1 = mit dem 1. Set trainiertes Modell
+* jpn_vert_v2 = mit dem 2. Set trainitertes Modell
+* jpn_vert_v3 = mit dem 3. Set trainiertes Modell
+
+Sonst "jpn_vert_v4" ist das Modell, das mit 3. Set, word- & punclist trainiert ist.
+Das Training mit word- & punclist kann, wie in [issue #155](https://github.com/tesseract-ocr/tesstrain/issues/155#issuecomment-619547494) steht, folgendarmassen gestaltet werden:
+
+Die [Lines 30 und 37 in makefile von tesstrain](https://github.com/tesseract-ocr/tesstrain/blob/1d8238684fe81e600431e5bdfe7dd24fbeaaf9f9/Makefile#L30) umschreiben
+'''
+# Optional Wordlist file for Dictionary dawg. Default: $(WORDLIST_FILE)
+WORDLIST_FILE := data/$(MODEL_NAME).wordlist
+
+# Optional Punc file for Punctuation dawg. Default: $(PUNC_FILE)
+PUNC_FILE := data/$(MODEL_NAME).punc
+'''
+
+Dann die beiden Listen, jpn_vert.wordlist und jpn_vert.punc, nennen und unter dem Ordner "./data/" stellen
+numberslist habe ich hier nicht verwendet.
+
+# Anwendung der Python-Codes
+
+## Requirement
+
+* Pyocr
+* Pillow
+* OpenCV
+* Numpy
+* Matplotlib
+* SPARQLWrapper
+
+## Ausführen
+
+`$ python preprocess_ocr.py [Pfad zum Originalbild] [Name des Output-Bildes]`
+Durch den Befehl werden zwei Image erstellt.
+Unter dem Namen der Output-Bild wird das Bild mit den erkannten Textfeldern gespeichert.
+Das File "result.tif" ist das bearbeitete Bild, das für weiteres OCR-Verfahren verwendet werden soll.
+
+`$ python ocr_tess.py [Pfad zum Zielbild] [Name des Output-Bildes] [lang-Modell, z.b. jpn_vert_v1]`
+Das lang_Modell muss bereits im Ordner sein, der durch "TESSDATA_PREFIX" definiert worden ist.
+Im Output-Bild werden die erkannten Textlinie gezeichnet.
+
+Die anderen Python-Code funktioniert ohne command-line arguments.
 
 
 
