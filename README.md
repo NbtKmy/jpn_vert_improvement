@@ -142,13 +142,13 @@ Sonst "jpn_vert_v4" ist das Modell, das mit 3. Set, word- & punclist trainiert i
 Das Training mit word- & punclist kann, wie in [issue #155](https://github.com/tesseract-ocr/tesstrain/issues/155#issuecomment-619547494) steht, folgendarmassen gestaltet werden:
 
 Die [Lines 30 und 37 in makefile von tesstrain](https://github.com/tesseract-ocr/tesstrain/blob/1d8238684fe81e600431e5bdfe7dd24fbeaaf9f9/Makefile#L30) umschreiben
-'''
+```
 # Optional Wordlist file for Dictionary dawg. Default: $(WORDLIST_FILE)
 WORDLIST_FILE := data/$(MODEL_NAME).wordlist
 
 # Optional Punc file for Punctuation dawg. Default: $(PUNC_FILE)
 PUNC_FILE := data/$(MODEL_NAME).punc
-'''
+```
 
 Dann die beiden Listen, jpn_vert.wordlist und jpn_vert.punc, nennen und unter dem Ordner "./data/" stellen
 numberslist habe ich hier nicht verwendet.

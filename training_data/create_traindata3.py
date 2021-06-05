@@ -3,7 +3,7 @@ import textwrap
 from PIL import Image, ImageDraw, ImageFont
 
 def create_train_txt():
-    with open('/home/nobu/wiki_v3.txt') as f:
+    with open('.../wiki_v3.txt') as f:
         txt = f.readlines()
         wiki = random.sample(txt, 1000)
 
